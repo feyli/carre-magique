@@ -135,8 +135,6 @@ def isCarreMagique_neuf():
         return False
     
     return True
-
-print(isCarreMagique_neuf())
     
 # Question 8
 
@@ -197,8 +195,12 @@ La premiére liste n'est pas un carré magique.
 def isCarreMagique_n(tab):
     taille = len(tab)
     largeur = sqrt(taille)
+    if largeur != int(largeur):
+        print("La liste n'est pas un carré")
+        return False
+    largeur = int(largeur)
         
-    print(tab)
+    afficheCarre(tab)
     
     # Constante magique pour un carré de largeurxlargeur
     constanteMagique = sum(tab) / largeur
@@ -213,9 +215,9 @@ def isCarreMagique_n(tab):
         if sum(tab[i::largeur]) != constanteMagique:
             return False
     
-        if (tab[0] + tab[(i*largeur)+1] + tab[(i*largeur)+1] + tab[(i*largeur)+1] != constanteMagique or
-        tab[(i*largeur)-1] + tab[(i*largeur)-1] + tab[(i*largeur)-1] + tab[(i*largeur)-1] != constanteMagique):
+        # Vérification des diagonales
+        if (sum(tab[i * (largeur + 1)] for i in range(largeur)) != constanteMagique or
+            sum(tab[(i + 1) * (largeur - 1)] for i in range(largeur)) != constanteMagique):
             return False
     
     return True
-
